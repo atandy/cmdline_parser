@@ -15,18 +15,22 @@ import json
 class Part():
     def __init__(self, mpn, reference_designators, manufacturer):
         self.mpn = mpn
-        self.reference_designators = reference_designators
+        self.reference_designators = reference_designators.split(',')
         self.manufacturer = manufacturer
+        self.part_key = '{}:{}'.format(self.mpn,self.manufacturer)
         return
 
-    def as_json(self):
+    def as_dict(self):
         d = { 
             "MPN": self.mpn,
             "Manufacturer": self.manufacturer,
-            "ReferenceDesignators": self.reference_designators
+            "ReferenceDesignators": self.reference_designators,
+            "PartKey": self.part_key
         }
+        return d
 
-        return json.dumps(d)
+    def as_json(self):
+        return json.dumps(self.as_dict())
 
 '''
 Format 1
@@ -98,20 +102,76 @@ class Parse():
 
         if len(self.input_line.split(';')) == 3:
             part = self.handle_f3()
-            parse_result = part.as_json()
+            parse_result = part
 
         elif len(self.input_line.split('--')) == 2:
             part = self.handle_f2()
-            parse_result = part.as_json()
+            parse_result = part
         
         elif len(self.input_line.split(':')) == 3:
             part = self.handle_f1()
-            parse_result = part.as_json()
+            parse_result = part
 
         if not parse_result:
             #TODO: throw an error here for unable to parse line.
             pass
-            
-        return parse_result:
-            
+
+        return parse_result
+      
+
+#- MPN and manufacturer most common
+# An MPN can appear on multiple lines. MPNs with different Manufacturers should be treated as different MPN.
+
+# parse all bomlines and get the parts
+#TESTING
+bomlines = ['TSR-1002:Panasonic:A1,D2', 'TSR-1002:Panasonic:A1,D2']
+parts = [Parse(line).parse_bom_line() for line in bomlines]
+#pd.DataFrame([p.as_dict() for p in parts])
+
+parts_list = []
+part_group_keys = {}
+
+
+for part in parts:
+    part_dict = part.as_dict()
+    # assign a list for the key 
+    part_group_keys[part_dict['PartKey']] = []
+    part_group_keys[part_dict['PartKey']].append(part_dict)
+    # merge reference designators
+
+
+
+as_list = []
+for part in parts:
+
+    group_key = [part.mpn+part.manufacturer]
+    as_list.append()
+
+class BOM():
+    def __init__(self):
+        self.part_list = []
+        self.part_keys = []
+        part_key_dict = {}
+        return
+
+    def add_part(self, part):
+        self.part_list.append()
+
+    def count_parts():
+
+        return 
+
+    def thing():
+        processed_keys = []
+        part_key_dict = {}
+        for part in parts:
+            if part.part_key in processed_keys:
+                # try to append designators 
+                part_key_dict[part.part_key] = list(set(part_key_dict[part.part_key]['ReferenceDesignators'].append(part.ReferenceDesignators)))
+            else:
+                part_key_dict[part.part_key] = part.as_dict()
+
+    def process_bom():
+        post_processed_bom = []
+        return post_processed_bom
             
