@@ -1,23 +1,15 @@
-
-
-''' 
-{
-    "MPN": "AXXX-1000",
-    "Manufacturer": "Panasonic",
-     "ReferenceDesignators": [
-     "D1",
-     "D8",
-     "D9"
-    ]
-}'''
 import json
 
 class Part():
     def __init__(self, mpn, reference_designators, manufacturer):
         self.mpn = mpn
-        self.reference_designators = reference_designators.split(',')
+        try:
+            self.reference_designators = reference_designators.split(',')
+        except AttributeError:
+            self.reference_designators = reference_designators
         self.manufacturer = manufacturer
         self.part_key = '{}:{}'.format(self.mpn,self.manufacturer)
+        self.num_occurences = 1
         return
 
     def as_dict(self):
@@ -25,24 +17,12 @@ class Part():
             "MPN": self.mpn,
             "Manufacturer": self.manufacturer,
             "ReferenceDesignators": self.reference_designators,
-            "PartKey": self.part_key
+            "NumOccurences": self.num_occurences
         }
         return d
 
     def as_json(self):
         return json.dumps(self.as_dict())
-
-'''
-Format 1
-MPN:Manufacturer:ReferenceDesignators
-TSR-1002:Panasonic:A1,D2
-
-
-
-
-
-A1,B2,C8;TSR-1002;Keystone
-'''
 
 class Parse():
     def __init__(self, input_line):
@@ -97,7 +77,6 @@ class Parse():
         If none of the check conditions pass, then we will return None.
         Do this to avoid issues with manufacturer name containing a split char.
         '''
-
         parse_result = None
 
         if len(self.input_line.split(';')) == 3:
@@ -117,40 +96,3 @@ class Parse():
             pass
 
         return parse_result
-      
-
-#- MPN and manufacturer most common
-# An MPN can appear on multiple lines. MPNs with different Manufacturers should be treated as different MPN.
-
-# parse all bomlines and get the parts
-#TESTING
-
-
-class BOM():
-    def __init__(self):
-        self.part_list = []
-        self.part_keys = []
-        part_key_dict = {}
-        return
-
-    def add_part(self, part):
-        self.part_list.append()
-
-    def count_parts():
-
-        return 
-
-    def thing():
-        processed_keys = []
-        part_key_dict = {}
-        for part in parts:
-            if part.part_key in processed_keys:
-                # try to append designators 
-                part_key_dict[part.part_key] = list(set(part_key_dict[part.part_key]['ReferenceDesignators'].append(part.ReferenceDesignators)))
-            else:
-                part_key_dict[part.part_key] = part.as_dict()
-
-    def process_bom():
-        post_processed_bom = []
-        return post_processed_bom
-            
