@@ -124,28 +124,7 @@ class Parse():
 
 # parse all bomlines and get the parts
 #TESTING
-bomlines = ['TSR-1002:Panasonic:A1,D2', 'TSR-1002:Panasonic:A1,D2']
-parts = [Parse(line).parse_bom_line() for line in bomlines]
-#pd.DataFrame([p.as_dict() for p in parts])
 
-parts_list = []
-part_group_keys = {}
-
-
-for part in parts:
-    part_dict = part.as_dict()
-    # assign a list for the key 
-    part_group_keys[part_dict['PartKey']] = []
-    part_group_keys[part_dict['PartKey']].append(part_dict)
-    # merge reference designators
-
-
-
-as_list = []
-for part in parts:
-
-    group_key = [part.mpn+part.manufacturer]
-    as_list.append()
 
 class BOM():
     def __init__(self):
