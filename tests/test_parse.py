@@ -14,18 +14,19 @@ class TestAdd(unittest.TestCase):
         self.assertEqual(part.manufacturer, 'Panasonic')
         self.assertEqual(part.reference_designators, ['A1','D2'])
 
+
     def test_empty_line(self):
         input_line = ''
         parser = Parse(input_line)
-        parse_result = parser.parse_bom_line()
-        self.assertIsNone(parse_result)
+        part = parser.parse_bom_line()
+        self.assertIsNone(part)
 
 
     def test_mangled_input(self):
         input_line = 'TSR---10302:Panaso;;frrk:A1,D2,2;'
         parser = Parse(input_line)
-        parse_result = parser.parse_bom_line()
-        self.assertIsNone(parse_result)
+        part = parser.parse_bom_line()
+        self.assertIsNone(part)
 
 
 if __name__ == '__main__':
