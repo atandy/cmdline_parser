@@ -1,28 +1,5 @@
 import json
-
-class Part():
-    def __init__(self, mpn, reference_designators, manufacturer):
-        self.mpn = mpn
-        try:
-            self.reference_designators = reference_designators.split(',')
-        except AttributeError:
-            self.reference_designators = reference_designators
-        self.manufacturer = manufacturer
-        self.part_key = '{}:{}'.format(self.mpn,self.manufacturer)
-        self.num_occurences = 1
-        return
-
-    def as_dict(self):
-        d = { 
-            "MPN": self.mpn,
-            "Manufacturer": self.manufacturer,
-            "ReferenceDesignators": self.reference_designators,
-            "NumOccurences": self.num_occurences
-        }
-        return d
-
-    def as_json(self):
-        return json.dumps(self.as_dict())
+from part import Part
 
 class Parse():
     def __init__(self, input_line):
@@ -36,10 +13,15 @@ class Parse():
         TSR-1002:Panasonic:A1,D2
         '''
         bom_info = self.input_line.split(':')
+
+        if not len(bom_info) == 3:
+            return None
+
         part = Part(
             mpn = bom_info[0],
             manufacturer = bom_info[1],
             reference_designators = bom_info[2])
+
         return part
     
     def handle_f2(self):
@@ -51,6 +33,9 @@ class Parse():
         bom_info = self.input_line.split('--')
         mpn_rd = bom_info[1].split(':')
         
+        if not (len(bom_info) == 2 and len(mpn_rd) == 2):
+            return None
+
         part = Part(
             mpn = mpn_rd[0],
             manufacturer = bom_info[0],
@@ -65,34 +50,38 @@ class Parse():
         '''
         #mpn, reference_designators, manufacturer
         bom_info = self.input_line.split(';')
+        
+        if not len(bom_info) == 3:
+            return None
+
         part = Part(
             mpn = bom_info[1], 
             reference_designators = bom_info[0],
             manufacturer = bom_info[2])
+        
         return part
 
     def parse_bom_line(self):
         '''
-        Do some basic checks on what we expect to happen when we split.
+        Do some basic checks on what we expect to happen when we split a bomline.
         If none of the check conditions pass, then we will return None.
         Do this to avoid issues with manufacturer name containing a split char.
         '''
-        parse_result = None
+        part = None
 
+        import pdb
+        
+        
         if len(self.input_line.split(';')) == 3:
             part = self.handle_f3()
-            parse_result = part
 
-        elif len(self.input_line.split('--')) == 2:
+        elif part is None and len(self.input_line.split('--')) == 2:
             part = self.handle_f2()
-            parse_result = part
         
-        elif len(self.input_line.split(':')) == 3:
+        elif part is None and len(self.input_line.split(':')) == 3:
             part = self.handle_f1()
-            parse_result = part
-
-        if not parse_result:
+        
+        if not part:
             #TODO: throw an error here for unable to parse line.
             pass
-
-        return parse_result
+        return part

@@ -1,7 +1,8 @@
+from part import Part
 from parse import Parse
-from parse import Part
 import json
 import argparse
+import sys
 
 parser = argparse.ArgumentParser(description='Process a BOM.')
 parser.add_argument('records', type=int,
@@ -14,10 +15,13 @@ parser.add_argument('--bomlines', type=str, help='Bom lines pasted to STDIN.')
 
 args = parser.parse_args()
 
+# fail if neither bom types are provided or if both are provided.
 if not args.bomfile and not args.bomlines:
     print('You must provide a bomfile or a set of bomlines to run the program.')
-elif args.bomfile and args.bomlines:
+    sys.exit()
+elif args.bomfile and args.bomlines:    
     print('Please provide either a bomfile or pasted bomlines.')
+    sys.exit()
 
 if args.bomfile:
     with open(args.bomfile) as file:
