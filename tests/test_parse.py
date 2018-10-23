@@ -26,34 +26,11 @@ class TestAdd(unittest.TestCase):
         part = parser.parse_bom_line()
         self.assertIsNone(part)
 
-
     def test_mangled_input(self):
         input_line = 'TSR---10302:Panaso;;frrk:A1,D2,2;'
         parser = Parse(input_line)
         part = parser.parse_bom_line()
         self.assertIsNone(part)
 
-
 if __name__ == '__main__':
     unittest.main()
-    '''
-    def test_add_integers(self):
-        """
-        Test that the addition of two integers returns the correct total
-        """
-        result = mymath.add(1, 2)
-        self.assertEqual(result, 3)
-    def test_add_floats(self):
-        """
-        Test that the addition of two floats returns the correct result
-        """
-        result = mymath.add(10.5, 2)
-        self.assertEqual(result, 12.5)
-    def test_add_strings(self):
-        """
-        Test the addition of two strings returns the two string as one
-        concatenated string
-        """
-        result = mymath.add('abc', 'def')
-        self.assertEqual(result, 'abcdef')
-    '''

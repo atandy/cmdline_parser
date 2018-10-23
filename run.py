@@ -27,17 +27,16 @@ if args.bomfile:
     with open(args.bomfile) as file:
         lines = file.readlines()
         parts = [Parse(line.rstrip('\n')).parse_bom_line() for line in lines]
+
 #TODO: fix this so that it flips to read stdin stream until there are two newlines.
 elif args.bomlines:
-    lines = bomlines.split('\n')
-    parts = [Parse(line).parse_bom_line() for line in lines]
+    pass
+    
+# remove failed parses or parses resulting in None
+parts = [part for part in parts if part]
 
+formatted_output = Parse.custom_part_formatter(
+    part_list=parts, 
+    record_count=args.records)
 
-formatted_output = Parse.custom_part_formatter(part_list=parts, record_count=args.records)
 print(json.dumps(formatted_output))
-
-#TODO: 
-    # check how to also sort by second item of reference designators
-    # read full STDIN
-    # check output is correct
-    # tests
