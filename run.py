@@ -38,5 +38,11 @@ parts = [part for part in parts if part]
 formatted_output = Parse.custom_part_formatter(
     part_list=parts, 
     record_count=args.records)
+import pprint 
 
-print(json.dumps(formatted_output))
+
+print(json.dumps(formatted_output, indent=4, sort_keys=True))
+
+#TODO: 
+    # add code for supporting or explaining that some lines were skipped
+    # determine how to handle multiple lines that have the same bom.

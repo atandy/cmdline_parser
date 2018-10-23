@@ -5,7 +5,7 @@ class Part():
             self.reference_designators = reference_designators.split(',')
         except AttributeError:
             self.reference_designators = reference_designators
-        self.manufacturer = manufacturer
+        self.manufacturer = manufacturer.rstrip()
         self.part_key = '{}:{}'.format(self.mpn,self.manufacturer)
         self.num_occurences = 1
         return

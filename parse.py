@@ -122,7 +122,7 @@ class Parse():
         # filters by number of records requested when calling custom_part_formatter()
         newlist = sorted(
             [p.as_dict() for p in formatted_parts], 
-            key=lambda k: k['NumOccurences'], 
+            key=lambda k: (k['NumOccurences'], len(k['ReferenceDesignators'])),
             reverse=True)[:record_count]
 
         return newlist
