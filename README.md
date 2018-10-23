@@ -1,14 +1,12 @@
-# cmdline parser
+# bomdotcom parser
 
 Python command line program to parse BOM lines. Take-home code exercise for Tempo Automation
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+[Untar the project folder](https://www.pendrivelinux.com/how-to-open-a-tar-file-in-unix-or-linux/) -- How to untar.
 
-[Untar the file](https://www.pendrivelinux.com/how-to-open-a-tar-file-in-unix-or-linux/) -- How to untar.
-
-Current version is written such that it requires bomlines to be provided in a .txt file. This is despite reading the question prompt requesting reading purely from STDIN, seemingly as a consistent stream. That said, I have left a bom.txt file in the repo that already has example BOMS in it. 
+Current version is written such that it requires bomlines to be provided in a .txt file. This is despite reading the question prompt requesting reading from STDIN. That said, I have left a bom.txt file in the repo that already has example Parts in it. 
 
 You can run the parser program with the following syntax:
 
@@ -16,15 +14,13 @@ You can run the parser program with the following syntax:
 
 "5" in the above example represents N number of records we want to return. 
 
-This run statement will output a JSON to STDOUT in the format requested. 
+This run statement will output JSON to STDOUT in the format requested. 
 
 ### Prerequisites
 
 Python 3
 
 ## Running the tests
-
-Explain how to run the automated tests for this system
 
 There is a tests folder that contains a single file. It can be run manually with the following command:
 

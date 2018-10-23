@@ -118,10 +118,10 @@ class Parse():
             new_part.num_occurences = count
             formatted_parts.append(new_part)
         
-        # sorts the list by num occurences, descending.
+        # sorts the list by num occurences, and num reference designators descending.
         # filters by number of records requested when calling custom_part_formatter()
         newlist = sorted(
-            [p.as_dict() for p in formatted_parts], 
+            [part.as_dict() for part in formatted_parts], 
             key=lambda k: (k['NumOccurences'], len(k['ReferenceDesignators'])),
             reverse=True)[:record_count]
 
