@@ -8,7 +8,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 [Untar the file](https://www.pendrivelinux.com/how-to-open-a-tar-file-in-unix-or-linux/) -- How to untar.
 
-Current version is written that it requires bomlines to be provided in a .txt file. This is despite reading the question prompt requesting reading purely from STDIN, seemingly as a consistent stream. That said, I have left a bom.txt file in the repo that already has example BOMS in it. 
+Current version is written such that it requires bomlines to be provided in a .txt file. This is despite reading the question prompt requesting reading purely from STDIN, seemingly as a consistent stream. That said, I have left a bom.txt file in the repo that already has example BOMS in it. 
 
 You can run the parser program with the following syntax:
 
@@ -26,13 +26,13 @@ Python 3
 
 Explain how to run the automated tests for this system
 
-There is a tests folder that contains two files. Either can be run manually with the following commands:
+There is a tests folder that contains a single file. It can be run manually with the following command:
 
 ```
-python tests/test_handle_part_input.py; 
-python tests/test_parse.pypython tests/test_handle_part_input.py
+python tests/test_parse.py
 ```
-The tests are not comprehensive or 1:1 based on the spec requirements. This is intentional. 
+
+The tests are not fully comprehensive or 1:1 based on the spec requirements. This is intentional. 
 
 ## Authors
 Alex Tandy

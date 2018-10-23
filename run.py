@@ -33,16 +33,16 @@ elif args.bomlines:
     pass
     
 # remove failed parses or parses resulting in None
-parts = [part for part in parts if part]
+part_list = [part for part in parts if part]
 
 formatted_output = Parse.custom_part_formatter(
-    part_list=parts, 
+    part_list=part_list, 
     record_count=args.records)
-import pprint 
 
+# TODO: tell user which lines failed to parse
+if len(part_list) < len(parts):
+    print("\nUnable to parse {} lines from the BOM input.\n" \
+        "Those entries were not included in the final formatted output below: \n".format(
+        len(parts)-len(part_list)))
 
 print(json.dumps(formatted_output, indent=4, sort_keys=True))
-
-#TODO: 
-    # add code for supporting or explaining that some lines were skipped
-    # determine how to handle multiple lines that have the same bom.

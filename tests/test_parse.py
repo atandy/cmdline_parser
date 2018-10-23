@@ -4,9 +4,13 @@ import unittest
 
 class TestAdd(unittest.TestCase):
     """
-    Test the format functions of the parser.
+    Test various methods from Parse class.
     """
+
     def test_format_one(self):
+        """
+        Test handling BOM format one.
+        """
         input_line = 'TSR-1002:Panasonic:A1,D2'
         parser = Parse(input_line)
         part = parser.parse_bom_line()
@@ -21,12 +25,18 @@ class TestAdd(unittest.TestCase):
         return
 
     def test_empty_line(self):
+        """
+        Test outcome of an empty line
+        """
         input_line = ''
         parser = Parse(input_line)
         part = parser.parse_bom_line()
         self.assertIsNone(part)
 
     def test_mangled_input(self):
+        """
+        Test outcome of mangled, multi-split input
+        """
         input_line = 'TSR---10302:Panaso;;frrk:A1,D2,2;'
         parser = Parse(input_line)
         part = parser.parse_bom_line()
