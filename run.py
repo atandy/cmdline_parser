@@ -1,8 +1,8 @@
-from part import Part
-from parse import Parse
 import json
 import argparse
 import sys
+from parse import Parse
+
 
 parser = argparse.ArgumentParser(description='Process a BOM.')
 parser.add_argument('records', type=int,

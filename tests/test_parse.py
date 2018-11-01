@@ -1,6 +1,5 @@
-from part import Part
-from parse import Parse
 import unittest
+from parse import Parse
 
 class TestAdd(unittest.TestCase):
     """
@@ -17,12 +16,6 @@ class TestAdd(unittest.TestCase):
         self.assertEqual(part.mpn, 'TSR-1002')
         self.assertEqual(part.manufacturer, 'Panasonic')
         self.assertEqual(part.reference_designators, ['A1','D2'])
-
-    def test_format_two(self):
-        return
-
-    def test_format_three(self):
-        return
 
     def test_empty_line(self):
         """

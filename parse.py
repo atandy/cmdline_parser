@@ -1,4 +1,3 @@
-import json
 from part import Part
 
 class Parse():
@@ -66,10 +65,7 @@ class Parse():
         If none of the check conditions pass, then we will return None.
         Do this to avoid issues with manufacturer name containing a split char.
         """
-        part = None
-
-        import pdb
-        
+        part = None        
         
         if len(self.input_line.split(';')) == 3:
             part = self.handle_f3()
