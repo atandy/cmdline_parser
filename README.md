@@ -1,12 +1,10 @@
 # bomdotcom parser
 
-Python command line program to parse BOM lines. Take-home code exercise for Tempo Automation
+Python command line program to parse txt input..
 
 ## Getting Started
 
-[Untar the project folder](https://www.pendrivelinux.com/how-to-open-a-tar-file-in-unix-or-linux/) -- How to untar.
-
-Current version is written such that it requires bomlines to be provided in a .txt file. This is despite reading the question prompt requesting reading from STDIN. That said, I have left a bom.txt file in the repo that already has example Parts in it. 
+Current version is written such that it requires lines to be provided in a .txt file. This is despite reading the question prompt requesting reading from STDIN. That said, I have left a bom.txt file in the repo that already has example Parts in it. 
 
 You can run the parser program with the following syntax:
 
